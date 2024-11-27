@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, TemplateView
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.db.models import Count, Q
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from .models import County, Bill, Comment, UserProfile, Notification
 from .forms import CommentForm, BillForm, UserProfileForm
 
@@ -166,3 +167,14 @@ class BillUpdateView(LoginRequiredMixin, UpdateView):
         response = super().form_valid(form)
         messages.success(self.request, 'Bill has been updated successfully.')
         return response
+
+@method_decorator(login_required, name='dispatch')
+class DashboardView(TemplateView):
+    template_name = 'core/dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['bills'] = Bill.objects.filter(author=user)
+        context['comments'] = Comment.objects.filter(author=user)
+        return context
