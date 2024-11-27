@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fy9#j&cy)*ew+dj80$)z%w@*h)voon&nv$o=x($(_k4!j(@e@m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['DevRay.pythonanywhere.com', 'localhost', '127.0.0.1']
 
