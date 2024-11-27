@@ -94,14 +94,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sauti_ya_mwananchi',
-        'USER': 'postgres',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'DevRay$sauti',
+        'USER': 'DevRay',
         'PASSWORD': 'coding2066',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': 'DevRay.mysql.pythonanywhere.com',
         'OPTIONS': {
-            'client_encoding': 'UTF8',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
     }
 }
